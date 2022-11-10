@@ -6,7 +6,7 @@ export const Form = () => {
 
 
     const schema = yup.object({
-        fullName: yup.string().required("campo requerido"),
+        fullName: yup.string().required("campo requerido").default("Hola mundo"),
         email: yup.string().email("Formato no valido").required("campo requerido"),
         age: yup.number().positive("Debe ser positivo").integer("NUmero entero").min(18).required("campo requerido"),
         password: yup.string().required("campo requerido").min(4).max(8),
@@ -14,7 +14,10 @@ export const Form = () => {
     })
 
     const {register, handleSubmit,formState: { errors }} = useForm({
-        resolver: yupResolver(schema)
+        resolver: yupResolver(schema),
+        defaultValues: {
+            fullName: 'Hola mundo'
+        }
     });
 
 
